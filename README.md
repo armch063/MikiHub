@@ -1048,6 +1048,20 @@ local SelectWeapon = AutoFarm:Dropdown("Select Weapon Farm",Wapon,function (Valu
     SelectToolWeaponOld = Value    
 end)
 
+AutoFarm:Button("Refresh Weapon",function()
+	SelectWeapon:Clear()
+	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+		if v:IsA("Tool") then
+			SelectWeapon:Add(v.Name)
+		end
+	end
+	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+		if v:IsA("Tool") then
+			SelectWeapon:Add(v.Name)
+		end
+	end
+end)
+
 AutoFarm:Toggle("AutoFarm Level",false,function(Value)
    _G.AutoFarm = Value
 	if _G.AutoFarm and SelectToolWeapon == "" then
@@ -1056,7 +1070,7 @@ AutoFarm:Toggle("AutoFarm Level",false,function(Value)
 		Auto_Farm = Value
                 Magnet = Value
 		SelectMonster = ""
-		if vu == false then
+		if Value == false then
 			wait(1)
 			TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 		end
